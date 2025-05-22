@@ -7,7 +7,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// 🔗 MongoDB Connection (Cloud/Local based on environment)
+// 🔗 MongoDB Connection (Cloud for Render, Local for dev)
 const mongoURI = process.env.MONGO_URI || "mongodb://localhost:27017/lims";
 
 mongoose.connect(mongoURI)
@@ -20,7 +20,7 @@ app.use("/api/auth", require("./routes/auth"));
 // 📬 General Request Routes (citizen request submission)
 app.use("/api/requests", require("./routes/requests"));
 
-// ✳️ Test Endpoints
+// ✳️ Optional test endpoints
 app.post("/api/registration", (req, res) => {
   console.log("📨 Registration Received:", req.body);
   res.json({ message: "Registration submitted successfully!" });
